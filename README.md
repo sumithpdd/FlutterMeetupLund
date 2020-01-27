@@ -10,3 +10,7 @@ You can see the current look of the Screens
 > inspiration from https://www.udemy.com/course/flutter-bootcamp-with-dart/
 
 
+## Depend on SQFlite
+Add the following dependencies to pubspec.yml and run “flutter packages get” command in the terminal.
+> sqflite: ^1.1.6+3
+> path_provider: ^1.2.0

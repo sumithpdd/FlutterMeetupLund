@@ -5,7 +5,7 @@ class Constants {
   static const String  COLUMN_DATE = "date";
   static const String  COLUMN_COMPLETED = "completed";
   static const String  COLUMN_ID = "id";
-  static const int  DBVERSION = 1;
+  static const int  DB_VERSION = 1;
   static const String  DBNAME = "todo.db";
  
 }
