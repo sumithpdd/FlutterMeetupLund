@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io'; 
-import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart'; 
 import 'package:path/path.dart';
 import 'package:todo_flutter/util/constants.dart';
 
@@ -20,7 +19,7 @@ class DatabaseHelper {
   }
 
   initDB() async {
-    Directory directory = await getApplicationDocumentsDirectory();
+    Directory directory ;//= await getApplicationDocumentsDirectory();
     String path = join(directory.path, Constants.DBNAME);
     var myDb =
         openDatabase(path, version: Constants.DB_VERSION, onCreate: _onCreate);

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:todo_flutter/services/http_services.dart'; 
+import 'package:todo_flutter/services/firebase_services.dart'; 
 import './screens/tasks_screen.dart';
 import 'controller/task_controller.dart';
+import 'screens/firebase_screen.dart';
 
 void main() async {
-  var services = HttpServices();
+  var services = FirebaseServices();
   var controller = TaskController(services);
   runApp(TodoApp(controller: controller));
+  //runApp( new MaterialApp(home: new FireBaseScreen()));
+ 
 }
 
 class TodoApp extends StatelessWidget {
