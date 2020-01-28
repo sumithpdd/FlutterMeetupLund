@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todo_flutter/controller/task_controller.dart';
 import 'package:todo_flutter/database/database_helper.dart';
 import 'package:todo_flutter/models/task.dart';
 import 'package:todo_flutter/screens/add_task_screen.dart';
 import 'package:todo_flutter/widgets/tasks_list.dart';
 
 class TasksScreen extends StatefulWidget {
+  final TaskController controller;
+
+  TasksScreen({this.controller});
   @override
   _TasksScreenState createState() => _TasksScreenState();
 }
@@ -32,24 +36,25 @@ class _TasksScreenState extends State<TasksScreen> {
   @override
   void initState() {
     super.initState();
+    widget.controller.onSync.listen((bool syncState) => setState(() {
+          _loading = syncState;
+        }));
     _loadTasks();
   }
 
   Future<void> _loadTasks() async {
-    var result = await _databaseHelper.getAllTasks();
+    var result = await widget.controller.fetchTasks();
+
+    // var result = await _databaseHelper.getAllTasks();
     _loading = true;
     setState(() {
       _tasks.clear();
-      result.forEach((row) => _tasks.add(Task.fromMap(row)));
+      _tasks = result;
+      // result.forEach((row) => _tasks.add(Task.fromMap(row)));
       _loading = false;
     });
   }
 
-  // List<Task> tasks = [
-  //   Task( 'Buy milk','remember to buy milk',  DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(new Duration(days: 50))), false) ,
-  //   Task( 'Buy eggs','remember to buy eggs',  DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(new Duration(days: 10))), false),
-  //   Task(  'Buy bread','remember to buy bread',  DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(new Duration(days: 5))), false)
-  // ];
   @override
   Widget build(BuildContext context) {
     Widget content;
